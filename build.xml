@@ -2,9 +2,15 @@
 <project name="JerseyBuild" default="build" basedir=".">
 	<property name="src.dir" location="src"/>
 	<property name="web.dir" location="web"/>
+	<property name="lib.dir" location="web/WEB-INF/lib/"/>
+	
 	<property name="class.dir" location="${web.dir}/WEB-INF/classes"/>
 	<path id="build.path">
-	    <fileset dir="web/WEB-INF/lib/" includes="*.jar"/>
+	    <fileset dir="web/WEB-INF/lib/" includes="**/*.jar"/>
+		 		
+		<fileset dir="${lib.dir}">
+		    <include name="**/*.jar" />
+		</fileset>
 	</path>
 	<property name="jar.file" value="jersey.war"/>
 	<property name="catalina.dir" value="c:/tomcat/webapps/"/>
