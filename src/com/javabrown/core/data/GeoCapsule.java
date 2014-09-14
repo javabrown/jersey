@@ -13,9 +13,9 @@ public class GeoCapsule {
 		geo = new BrownCapsule();
 	}
 	
-	public List<Map<String,String>> getStates(){
+	public List<Map<String,String>> getStates(String countryCode){
 		try {
-			BrownGeoCapsuleI us = this.geo.getGeoCapsule("US");
+			BrownGeoCapsuleI us = this.geo.getGeoCapsule(countryCode.toUpperCase());
 			return us.getCapsuleData().getAllStates();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

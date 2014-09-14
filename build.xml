@@ -18,7 +18,7 @@
 	<target name='build'>
 		<delete dir="${class.dir}" failonerror="true"/>
 		<mkdir dir="${class.dir}"/>
-	  <javac srcdir="${src.dir}" destdir="${class.dir}">
+	  <javac srcdir="${src.dir}" destdir="${class.dir}" debug="true">
 	  	<classpath refid="build.path"/>
 	  </javac>
 		
