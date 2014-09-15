@@ -15,8 +15,15 @@ public class GeoCapsule {
 	
 	public List<Map<String,String>> getStates(String countryCode){
 		try {
-			BrownGeoCapsuleI us = this.geo.getGeoCapsule(countryCode.toUpperCase());
-			return us.getCapsuleData().getAllStates();
+			if(countryCode == null || countryCode.trim().equalsIgnoreCase("")){
+				countryCode = "US";
+			}
+			
+			BrownGeoCapsuleI state = this.geo.getGeoCapsule(countryCode.toUpperCase());
+			if(state == null || state.getCapsuleData() == null){
+				state = this.geo.getGeoCapsule(countryCode);
+			}
+			return state.getCapsuleData().getAllStates();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
