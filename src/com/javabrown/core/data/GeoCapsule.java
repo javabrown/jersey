@@ -3,6 +3,7 @@ package com.javabrown.core.data;
 import java.util.List;
 import java.util.Map;
 
+import com.javabrown.core.data.cache.JBrownCache;
 import com.jbrown.ext.capsule.BrownCapsule;
 import com.jbrown.ext.capsule.impl.BrownGeoCapsuleI;
 
@@ -14,6 +15,18 @@ public class GeoCapsule {
 	}
 	
 	public List<Map<String,String>> getStates(String countryCode){
+		Object stateObj = JBrownCache.getInstance().get("states");
+		
+		List<Map<String,String>> states = null;
+		
+		if(stateObj != null && stateObj instanceof List) {
+			states = (List<Map<String,String>>) stateObj;
+		}
+		
+		if(states != null && states.size() > 0){//cache read
+			return states;
+		}
+		
 		try {
 			if(countryCode == null || countryCode.trim().equalsIgnoreCase("")){
 				countryCode = "US";
@@ -23,9 +36,11 @@ public class GeoCapsule {
 			if(state == null || state.getCapsuleData() == null){
 				state = this.geo.getGeoCapsule(countryCode);
 			}
-			return state.getCapsuleData().getAllStates();
+			
+			states = state.getCapsuleData().getAllStates();
+			JBrownCache.getInstance().put("states", states);
+			return states;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

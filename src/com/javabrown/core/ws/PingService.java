@@ -7,6 +7,8 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Component;
 
+import com.javabrown.core.data.cache.JBrownCache;
+
 @Component
 @Path("/hello")
 public class PingService {
@@ -14,6 +16,7 @@ public class PingService {
 	@Path("/{param}")
 	public Response getMsg(@PathParam("param") String msg){
 		String output = "Jersey say : " + msg;
+		JBrownCache.getInstance().put("test", "RAJA KHAN");
 		return Response.status(200).entity(output).build();
 	}
 }

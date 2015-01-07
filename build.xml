@@ -13,7 +13,7 @@
 		</fileset>
 	</path>
 	<property name="jar.file" value="jersey.war"/>
-	<property name="catalina.dir" value="c:/tomcat/webapps/"/>
+	<property name="catalina.dir" value="c:/tomcat-8/webapps/"/>
 	
 	<target name='build'>
 		<delete dir="${class.dir}" failonerror="true"/>
